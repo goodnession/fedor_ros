@@ -1,0 +1,104 @@
+-
+  name: R.ShoulderF
+  minAngPos: -150
+  maxAngPos: 90
+  torq: 322.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.ShoulderS
+  minAngPos: -150
+  maxAngPos:
+  torq: 495
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.Elbow
+  minAngPos: -120
+  maxAngPos: 5
+  torq: 255
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.ElbowR
+  minAngPos: -110
+  maxAngPos: 110
+  torq: 225
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.WristF
+  minAngPos: -18
+  maxAngPos: 33
+  torq: 37.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.WristS
+  minAngPos: -25
+  maxAngPos: 15
+  torq: 37.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.WristR
+  minAngPos: -110
+  maxAngPos: 110
+  torq: 75
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.Finger.Thumb
+  minAngPos: -75
+  maxAngPos: -10
+  torq: 1.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.Finger.ThumbS
+  minAngPos: -90
+  maxAngPos: 10
+  torq: 1.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.Finger.Index
+  minAngPos: 12
+  maxAngPos: 80
+  torq: 1.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.Finger.Middle
+  minAngPos: 12
+  maxAngPos: 80
+  torq: 1.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.Finger.Ring
+  minAngPos: 12
+  maxAngPos: 80
+  torq: 1.5
+  kP: 0
+  kI: 0
+  kD: 0
+-
+  name: R.Finger.Little
+  minAngPos: 12
+  maxAngPos: 80
+  torq: 1.5
+  kP: 0
+  kI: 0
+  kD: 0

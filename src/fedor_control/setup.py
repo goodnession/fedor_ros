@@ -5,10 +5,10 @@ package_name = 'fedor_control'
 setup(
     name=package_name,
     version='0.0.0',
-    packages=[package_name, package_name + '/tcp_connector'],
+    packages=[package_name, package_name + '/tcp_connector', package_name + '/motor'],
     data_files=[
         ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+            ['resource/' + package_name, 'resource/motors.yaml']),
         ('share/' + package_name, ['package.xml']),
     ],
     install_requires=['setuptools'],

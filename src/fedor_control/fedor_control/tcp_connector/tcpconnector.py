@@ -2,6 +2,14 @@ import socket
 
 
 class TcpConnector:
+    """Подключение к симулятору по протоколу TCP через сокеты.
+
+    Аргументы:
+
+    host -- хост;
+
+    port -- порт.
+    """
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     connected = False
 
@@ -11,18 +19,22 @@ class TcpConnector:
         self.connect()
 
     def connect(self) -> None:
+        """Подключается к симулятору."""
         self.sock.connect((self.host, self.port))
         self.connected = True
 
     def disconnect(self) -> None:
+        """Отключается от симулятора."""
         self.sock.close()
         self.connected = False
 
     def reconnect(self) -> None:
+        """Переподключается к симулятору."""
         self.disconnect()
         self.connect()
 
-    def request(self, req):
+    def request(self, req) -> str:
+        """Делает запрос симулятору."""
         while True:
             try:
                 self.sock.send((req + '\n').encode())
