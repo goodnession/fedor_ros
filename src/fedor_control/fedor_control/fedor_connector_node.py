@@ -1,10 +1,12 @@
+import json
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from .tcp_connector.tcpconnector import TcpConnector
 
 
-PERIOD = 0.5  # Устанавливаем в секундах период отправки сообщений в топиках
+PERIOD = 0.05  # Устанавливаем в секундах период отправки сообщений в топиках
 HOST = '192.168.0.101'
 PORT = 10099
 
@@ -20,7 +22,7 @@ class FedorConnector(Node):
         super().__init__('fedor_connector')
         # Подключаемся к симулятору
         self.conn = TcpConnector(host=HOST, port=PORT)
-        # Инициализируем publisher
+        # Инициализируем publisher текущих позиций моторов
         self.publisher_motors_position = self.create_publisher(String,
                                                                'motors_position_topic',
                                                                10,
@@ -29,13 +31,19 @@ class FedorConnector(Node):
         self.timer_pub_motors_position = self.create_timer(timer_period,
                                                            self.pub_motors_position_callback,
                                                            )
-        # Инициализируем subscriber
+        # Инициализируем subscriber на список моторов
         self.subscription_motors_list = self.create_subscription(
             String,
             'motors_list_topic',
             self.sub_motors_list_callback,
             10)
         self.motors_list = ''
+        # Инициализируем subscriber на значения тока
+        self.subscription_motors_torqset = self.create_subscription(
+            String,
+            'motors_torqset_topic',
+            self.sub_motors_torqset_callback,
+            10)
 
     def pub_motors_position_callback(self):
         """Отправлят текущие позиции моторов."""
@@ -43,7 +51,7 @@ class FedorConnector(Node):
         motors_position = self.conn.request(
             f'robot:motors:{self.motors_list}:posget')
         msg.data = str(motors_position)
-        self.get_logger().info(msg.data)
+        # self.get_logger().info(msg.data)
         self.publisher_motors_position.publish(msg)
 
     def sub_motors_list_callback(self, msg):
@@ -54,6 +62,19 @@ class FedorConnector(Node):
         msg -- полученное сообщение.
         """
         self.motors_list = msg.data
+
+    def sub_motors_torqset_callback(self, msg):
+        temp = json.loads(msg.data)
+        # motors = ''
+        # torq = ''
+        # self.get_logger().info(json.dumps(temp, indent=4))
+        for el in temp:
+            for k, v in el.items():
+                # motors += k + ';'
+                # torq += str(v) + ';'
+                self.conn.request(f'robot:motors:{k}:torqset:{str(v)}')
+        # self.get_logger().info(f'{motors}:{torq}')
+        # self.conn.request(f'robot:motors:{k}:torqset:{v}')
 
 
 def main(args=None):
