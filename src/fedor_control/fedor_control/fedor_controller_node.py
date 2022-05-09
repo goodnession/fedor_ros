@@ -1,4 +1,5 @@
 import json
+import requests
 
 import rclpy
 import yaml
@@ -6,6 +7,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 from .motor.motor import Motor
+
 
 PERIOD = 0.05  # Устанавливаем в секундах период отправки сообщений в топиках
 
@@ -27,46 +29,52 @@ class FedorController(Node):
             10,
         )
         # Инициализируем publisher списка моторов
-        self.publisher_motors_list = self.create_publisher(String,
-                                                           'motors_list_topic',
-                                                           10,
-                                                           )
+        self.publisher_motors_list = self.create_publisher(
+            String,
+            'motors_list_topic',
+            10,
+        )
         timer_period = PERIOD
-        self.timer_pub_motors_list = self.create_timer(timer_period,
-                                                       self.pub_motors_list_callback,
-                                                       )
+        self.timer_pub_motors_list = self.create_timer(
+            timer_period,
+            self.pub_motors_list_callback,
+        )
         # Инициализируем publisher значений тока
-        self.publisher_motors_torqset = self.create_publisher(String,
-                                                              'motors_torqset_topic',
-                                                              10,
-                                                              )
-        self.timer_pub_motors_torqset = self.create_timer(timer_period,
-                                                          self.pub_motors_torqset_callback,
-                                                          )
+        self.publisher_motors_torqset = self.create_publisher(
+            String,
+            'motors_torqset_topic',
+            10,
+        )
+        self.timer_pub_motors_torqset = self.create_timer(
+            timer_period,
+            self.pub_motors_torqset_callback,
+        )
         # Инициализируем моторы
         # Считываем из конфига моторов
         self.motors = []
-        with open('install/fedor_control/share/ament_index/resource_index/packages/motors.yaml',
-                  'r',
-                  ) as stream:
+        with open(
+                'install/fedor_control/share/ament_index/resource_index/packages/motors.yaml',
+                'r',
+        ) as stream:
             try:
                 m = yaml.safe_load(stream)
+
                 for el in m:
                     self.motors.append(
-                        Motor(name=el['name'],
-                              minAngPos=el['minAngPos'],
-                              maxAngPos=el['maxAngPos'],
-                              torq=el['torq'],
-                              kP=el['kP'],
-                              kI=el['kI'],
-                              kD=el['kD'],
-                              t=PERIOD,
-                              )
+                        Motor(
+                            name=el['name'],
+                            minAngPos=el['minAngPos'],
+                            maxAngPos=el['maxAngPos'],
+                            torq=el['torq'],
+                            kP=el['kP'],
+                            kI=el['kI'],
+                            kD=el['kD'],
+                            t=PERIOD,
+                            description=el['description'],
+                        ),
                     )
             except yaml.YAMLError as exc:
                 self.get_logger().error(exc)
-
-        self.motors_current_position = []  # Текущее положение моторов
 
     def sub_motors_position_callback(self, msg) -> None:
         """Получает текущее положение моторов.
@@ -77,17 +85,28 @@ class FedorController(Node):
         """
         if msg.data != 'None':
             motors_data = msg.data.split(';')
-            self.motors_current_position = []  # Очищаем список
 
             for i in range(len(self.motors)):
-                # self.motors_current_position.append(dict([(self.motors[i].name, motors_data[i])]))
-                self.motors[i].current_position = float(motors_data[i])
+                self.motors[i].current_position = round(float(motors_data[i]), 2)
 
-            # for mt in self.motors_current_position:
-            #     for k, v in mt.items():
-            #         self.get_logger().info(f'{k} : {v}')
+            mot = []
 
-            # self.get_logger().info(json.dumps(self.motors_current_position, indent=4))
+            for mt in self.motors:
+                mot.append(
+                    dict([
+                        ('name', mt.name),
+                        ('description', mt.description),
+                        ('current_position', mt.current_position),
+                        ('minAngPos', mt.minAngPos),
+                        ('maxAngPos', mt.maxAngPos),
+                    ]),
+                )
+
+            requests.post(
+                'http://127.0.0.1:5000/motors_position',
+                json=json.dumps(mot),
+            )
+
 
     def pub_motors_list_callback(self) -> None:
         """Отправляет список моторов."""
@@ -96,23 +115,22 @@ class FedorController(Node):
         for i in range(len(self.motors)):
             msg.data += self.motors[i].name + ';'
 
-        # self.get_logger().info(msg.data)
         self.publisher_motors_list.publish(msg)
 
     def pub_motors_torqset_callback(self) -> None:
         """Вычисляет с помощью ПИД-регулятора и отправляет значение тока мотороам."""
-        # if len(self.motors_current_position) > 0:
-        #     for k, v in self.motors_current_position[0].items():
-        #         temp = dict([(k, self.motors[0].pid_compute(0, v))])
-        #         self.get_logger().info(v)
-        #
-        #     msg = String()
-        #     msg.data = json.dumps(temp)
-        #     self.publisher_motors_torqset.publish(msg)
+        motors_setpoint = requests.get('http://127.0.0.1:5000/motors_setpoint').json()
         temp = []
-        for i in range(len(self.motors)):
-        # for i in range(1):
-            temp.append(dict([(self.motors[i].name, self.motors[i].pid_compute(0))]))
+
+        for el in motors_setpoint:
+            for i in range(len(self.motors)):
+                if el['name'] == self.motors[i].name and el['setpoint'] != '':
+                    temp.append(
+                        dict([
+                            (self.motors[i].name, self.motors[i].pid_compute(el['setpoint'])),
+                        ]),
+                    )
+
         msg = String()
         msg.data = json.dumps(temp)
         self.publisher_motors_torqset.publish(msg)

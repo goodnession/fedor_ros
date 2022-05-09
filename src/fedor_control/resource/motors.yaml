@@ -1,5 +1,6 @@
 -
   name: R.ShoulderF
+  description: Движение плечевого сустава вперед
   minAngPos: -150
   maxAngPos: 90
   torq: 322.5
@@ -8,14 +9,16 @@
   kD: 0
 -
   name: R.ShoulderS
+  description: Движение плечевого сустава в сторону
   minAngPos: -150
-  maxAngPos:
+  maxAngPos: 90
   torq: 495
   kP: 0
   kI: 0
   kD: 0
 -
   name: R.Elbow
+  description: Сгиб локтя
   minAngPos: -120
   maxAngPos: 5
   torq: 255
@@ -24,6 +27,7 @@
   kD: 0
 -
   name: R.ElbowR
+  description: Вращение локтя
   minAngPos: -110
   maxAngPos: 110
   torq: 225
@@ -32,6 +36,7 @@
   kD: 0
 -
   name: R.WristF
+  description: Движение кисти вперед
   minAngPos: -18
   maxAngPos: 33
   torq: 37.5
@@ -40,6 +45,7 @@
   kD: 0
 -
   name: R.WristS
+  description: Движение кисти в сторону
   minAngPos: -25
   maxAngPos: 15
   torq: 37.5
@@ -48,6 +54,7 @@
   kD: 0
 -
   name: R.WristR
+  description: Вращение кисти
   minAngPos: -110
   maxAngPos: 110
   torq: 75
@@ -56,6 +63,7 @@
   kD: 0
 -
   name: R.Finger.Thumb
+  description: Сгиб большого пальца
   minAngPos: -75
   maxAngPos: -10
   torq: 1.5
@@ -64,6 +72,7 @@
   kD: 0
 -
   name: R.Finger.ThumbS
+  description: Вращение большого пальца в сторону
   minAngPos: -90
   maxAngPos: 10
   torq: 1.5
@@ -72,6 +81,7 @@
   kD: 0
 -
   name: R.Finger.Index
+  description: Сгиб указательного пальца
   minAngPos: 12
   maxAngPos: 80
   torq: 1.5
@@ -80,6 +90,7 @@
   kD: 0
 -
   name: R.Finger.Middle
+  description: Сгиб среднего пальца
   minAngPos: 12
   maxAngPos: 80
   torq: 1.5
@@ -88,6 +99,7 @@
   kD: 0
 -
   name: R.Finger.Ring
+  description: Сгиб безымянного пальца
   minAngPos: 12
   maxAngPos: 80
   torq: 1.5
@@ -96,6 +108,7 @@
   kD: 0
 -
   name: R.Finger.Little
+  description: Сгиб мизинца
   minAngPos: 12
   maxAngPos: 80
   torq: 1.5

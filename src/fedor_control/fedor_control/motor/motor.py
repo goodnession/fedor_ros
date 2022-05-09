@@ -20,7 +20,7 @@ class Motor:
     t -- период.
     """
 
-    def __init__(self, name, minAngPos, maxAngPos, torq, kP, kI, kD, t) -> None:
+    def __init__(self, name, minAngPos, maxAngPos, torq, kP, kI, kD, t, description) -> None:
         self.name = name
         self.minAngPos = minAngPos
         self.maxAngPos = maxAngPos
@@ -36,17 +36,23 @@ class Motor:
         self.derivative_error = 0
         self.output = 0
         self.current_position = 0.0
+        self.description = description
 
     def pid_compute(self, setpoint) -> float:
         """Работа ПИД-регулятора.
 
         Аргументы:
 
-        setpoint -- требуемое значение;
-
-        curpos -- текущее значение.
+        setpoint -- требуемое значение.
         """
         self.setpoint = float(setpoint)
+        # Проверяем корректность данных
+        if self.setpoint < self.minAngPos:
+            self.setpoint = self.minAngPos
+
+        if self.setpoint > self.maxAngPos:
+            self.setpoint = self.maxAngPos
+
         self.error = self.setpoint - self.current_position
         self.integral_error += self.error * self.t
         self.derivative_error = (self.error - self.error_last) / self.t

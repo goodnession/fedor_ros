@@ -65,16 +65,9 @@ class FedorConnector(Node):
 
     def sub_motors_torqset_callback(self, msg):
         temp = json.loads(msg.data)
-        # motors = ''
-        # torq = ''
-        # self.get_logger().info(json.dumps(temp, indent=4))
         for el in temp:
             for k, v in el.items():
-                # motors += k + ';'
-                # torq += str(v) + ';'
                 self.conn.request(f'robot:motors:{k}:torqset:{str(v)}')
-        # self.get_logger().info(f'{motors}:{torq}')
-        # self.conn.request(f'robot:motors:{k}:torqset:{v}')
 
 
 def main(args=None):
