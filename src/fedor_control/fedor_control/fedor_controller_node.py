@@ -119,6 +119,18 @@ class FedorController(Node):
 
     def pub_motors_torqset_callback(self) -> None:
         """Вычисляет с помощью ПИД-регулятора и отправляет значение тока мотороам."""
+        motors_pid = requests.get('http://127.0.0.1:5000/motors_pid').json()
+        # Устанавливаем ПИД-коэффициенты
+        for el in motors_pid:
+            for i in range(len(self.motors)):
+                if el['name'] == self.motors[i].name:
+                    if el['kP'] != '':
+                        self.motors[i].kP = float(el['kP'])
+                    if el['kI'] != '':
+                        self.motors[i].kI = float(el['kI'])
+                    if el['kD'] != '':
+                        self.motors[i].kD = float(el['kD'])
+
         motors_setpoint = requests.get('http://127.0.0.1:5000/motors_setpoint').json()
         temp = []
 

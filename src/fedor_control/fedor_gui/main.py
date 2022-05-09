@@ -10,6 +10,7 @@ api = Api()
 
 MOTORS_SETPOINT = []
 MOTORS_POSITION = []
+MOTORS_PID = []
 
 
 class Main(Resource):
@@ -59,10 +60,29 @@ class Chart(Resource):
         return make_response(render_template('chart.html'))
 
 
+class MotorsPID(Resource):
+
+    def get(self):
+        return MOTORS_PID
+
+    def post(self):
+        MOTORS_PID.clear()
+        data_json = request.form.keys()
+
+        for el in data_json:
+            data = json.loads(el)
+
+            for item in data:
+                MOTORS_PID.append(item)
+
+        return 201
+
+
 api.add_resource(Main, '/')
 api.add_resource(MotorsSetpoint, '/motors_setpoint')
 api.add_resource(MotorsPosition, '/motors_position')
 api.add_resource(Chart, '/chart')
+api.add_resource(MotorsPID, '/motors_pid')
 api.init_app(app)
 
 
