@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
     <title>FEDOR GUI</title>
 </head>
@@ -25,10 +26,11 @@
             <th scope="col" class="col-1">Минимальный угол положения</th>
             <th scope="col" class="col-1">Максимальный угол положения</th>
             <th scope="col" class="col-1">Текущее положение</th>
-            <th scope="col" class="col-2">Желаемое положение</th>
+            <th scope="col" class="col-1">Желаемое положение</th>
             <th scope="col" class="col-1">kP</th>
             <th scope="col" class="col-1">kI</th>
             <th scope="col" class="col-1">kD</th>
+            <th scope="col" class="col-1">График</th>
         </tr>
         </thead>
         <tbody>
@@ -50,24 +52,10 @@
             <td>
                 <input type="number" value="" autocomplete="off" size="3">
             </td>
-        </tr>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>
-                <input type="number" value="" autocomplete="off" size="10">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn0">
+                    Построить
+                </button>
             </td>
         </tr>
         <tr>
@@ -88,24 +76,10 @@
             <td>
                 <input type="number" value="" autocomplete="off" size="3">
             </td>
-        </tr>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>
-                <input type="number" value="" autocomplete="off" size="10">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn1">
+                    Построить
+                </button>
             </td>
         </tr>
         <tr>
@@ -126,24 +100,10 @@
             <td>
                 <input type="number" value="" autocomplete="off" size="3">
             </td>
-        </tr>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>
-                <input type="number" value="" autocomplete="off" size="10">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn2">
+                    Построить
+                </button>
             </td>
         </tr>
         <tr>
@@ -164,24 +124,10 @@
             <td>
                 <input type="number" value="" autocomplete="off" size="3">
             </td>
-        </tr>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>
-                <input type="number" value="" autocomplete="off" size="10">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn3">
+                    Построить
+                </button>
             </td>
         </tr>
         <tr>
@@ -202,24 +148,10 @@
             <td>
                 <input type="number" value="" autocomplete="off" size="3">
             </td>
-        </tr>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>
-                <input type="number" value="" autocomplete="off" size="10">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn4">
+                    Построить
+                </button>
             </td>
         </tr>
         <tr>
@@ -240,24 +172,10 @@
             <td>
                 <input type="number" value="" autocomplete="off" size="3">
             </td>
-        </tr>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>
-                <input type="number" value="" autocomplete="off" size="10">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
-            </td>
-            <td>
-                <input type="number" value="" autocomplete="off" size="3">
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn5">
+                    Построить
+                </button>
             </td>
         </tr>
         <tr>
@@ -277,6 +195,155 @@
             </td>
             <td>
                 <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn6">
+                    Построить
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="10">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn7">
+                    Построить
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="10">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn8">
+                    Построить
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="10">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn9">
+                    Построить
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="10">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn10">
+                    Построить
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="10">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn11">
+                    Построить
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="10">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <input type="number" value="" autocomplete="off" size="3">
+            </td>
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-block" type="button" id="btn12">
+                    Построить
+                </button>
             </td>
         </tr>
         </tbody>
@@ -285,23 +352,419 @@
 </div
 </div>
 <div class="container">
-    <button class="btn btn-outline-dark btn-sm btn-block" type="button" onclick="sendSetpoint()">Отправить запрос</button>
+    <button class="btn btn-outline-dark btn-sm btn-block" type="button" onclick="sendSetpoint()">Отправить запрос
+    </button>
 </div>
 <div class="container">
-    <button class="btn btn-outline-dark btn-sm btn-block" type="button" onclick="sendPID()">Отправить коэффициенты PID</button>
+    <button class="btn btn-outline-dark btn-sm btn-block" type="button" onclick="sendPID()">Отправить коэффициенты PID
+    </button>
 </div>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
-<!--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"-->
-<!--        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"-->
-<!--        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"-->
-<!--        crossorigin="anonymous"></script>-->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+    charts = []
+    const ctx = document.getElementById('canvas').getContext('2d');
+
+    document.getElementById("btn0").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[1].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn1").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[2].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn2").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[3].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn3").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[4].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn4").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[5].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn5").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[6].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn6").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[7].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn7").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[8].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn8").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[9].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn9").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[10].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn10").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[11].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn11").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[12].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+
+    document.getElementById("btn12").onclick = function () {
+        if (charts.length > 0) {
+            charts[0].destroy();
+            charts.pop();
+        }
+
+        charts.push(
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: document.getElementById("table").rows[13].cells[0].innerHTML,
+                        data: 0,
+                        fill: false,
+                        borderColor: '#343e9a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            })
+        );
+    };
+</script>
 <script>
     setInterval(function () {
         $.ajax(
@@ -311,16 +774,35 @@
                 success: function (data) {
                     var table = document.getElementById("table");
                     for (var i = 0; i < data.length; i++) {
-                        table.rows[i + 1].cells[0].innerHTML = data[i].name;
-                        table.rows[i + 1].cells[1].innerHTML = data[i].description;
-                        table.rows[i + 1].cells[2].innerHTML = data[i].minAngPos;
-                        table.rows[i + 1].cells[3].innerHTML = data[i].maxAngPos;
+                        if (table.rows[i + 1].cells[0].innerHTML === '') {
+                            table.rows[i + 1].cells[0].innerHTML = data[i].name;
+                            table.rows[i + 1].cells[1].innerHTML = data[i].description;
+                            table.rows[i + 1].cells[2].innerHTML = data[i].minAngPos;
+                            table.rows[i + 1].cells[3].innerHTML = data[i].maxAngPos;
+                            console.log('NOT OK');
+                        }
                         table.rows[i + 1].cells[4].innerHTML = data[i].current_position;
+
+                        if (charts.length > 0) {
+                            var today = new Date();
+
+                            if (charts[0].data.labels.length === 50) {
+                                charts[0].data.labels.shift();
+                                charts[0].data.datasets[0].data.shift();
+                            };
+
+                            if (charts[0].data.datasets[0].label === data[i].name) {
+                                charts[0].data.labels.push(today.getSeconds() + ":" + today.getMilliseconds());
+                                charts[0].data.datasets[0].data.push(data[i].current_position);
+                                charts[0].data.datasets[0].label = data[i].name;
+                                charts[0].update();
+                            }
+                        }
                     }
                 }
             }
         );
-    }, 1000);
+    }, 50);
 </script>
 <script>
     function sendSetpoint() {
@@ -354,7 +836,6 @@
             jsonData['kD'] = kD;
             data.push(jsonData);
         }
-        console.log(JSON.stringify(data));
         $.ajax({
             type: "POST",
             url: "http://127.0.0.1:5000/motors_pid",

@@ -54,12 +54,6 @@ class MotorsPosition(Resource):
         return 201
 
 
-class Chart(Resource):
-
-    def get(self):
-        return make_response(render_template('chart.html'))
-
-
 class MotorsPID(Resource):
 
     def get(self):
@@ -81,7 +75,6 @@ class MotorsPID(Resource):
 api.add_resource(Main, '/')
 api.add_resource(MotorsSetpoint, '/motors_setpoint')
 api.add_resource(MotorsPosition, '/motors_position')
-api.add_resource(Chart, '/chart')
 api.add_resource(MotorsPID, '/motors_pid')
 api.init_app(app)
 
