@@ -6,7 +6,7 @@ from std_msgs.msg import String
 from .tcp_connector.tcpconnector import TcpConnector
 
 
-PERIOD = 0.05  # Устанавливаем в секундах период отправки сообщений в топиках
+PERIOD = 0.01  # Устанавливаем в секундах период отправки сообщений в топиках
 HOST = '192.168.0.101'
 PORT = 10099
 
@@ -21,16 +21,21 @@ class FedorConnector(Node):
         # Присваиваем ноду имя
         super().__init__('fedor_connector')
         # Подключаемся к симулятору
-        self.conn = TcpConnector(host=HOST, port=PORT)
+        self.conn = TcpConnector(
+            host=HOST,
+            port=PORT,
+        )
         # Инициализируем publisher текущих позиций моторов
-        self.publisher_motors_position = self.create_publisher(String,
-                                                               'motors_position_topic',
-                                                               10,
-                                                               )
+        self.publisher_motors_position = self.create_publisher(
+            String,
+            'motors_position_topic',
+            10,
+        )
         timer_period = PERIOD
-        self.timer_pub_motors_position = self.create_timer(timer_period,
-                                                           self.pub_motors_position_callback,
-                                                           )
+        self.timer_pub_motors_position = self.create_timer(
+            timer_period,
+            self.pub_motors_position_callback,
+        )
         # Инициализируем subscriber на список моторов
         self.subscription_motors_list = self.create_subscription(
             String,

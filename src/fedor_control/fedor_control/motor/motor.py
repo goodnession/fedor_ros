@@ -17,7 +17,9 @@ class Motor:
 
     kD -- Д коэффициент для ПИД-регулятора;
 
-    t -- период.
+    t -- период;
+
+    description -- описание мотора.
     """
 
     def __init__(self, name, minAngPos, maxAngPos, torq, kP, kI, kD, t, description) -> None:

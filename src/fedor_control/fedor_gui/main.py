@@ -27,6 +27,7 @@ class MotorsSetpoint(Resource):
     def post(self):
         MOTORS_SETPOINT.clear()
         data = request.form.to_dict()
+
         for k, v in data.items():
             MOTORS_SETPOINT.append(
                 dict([

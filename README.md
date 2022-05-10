@@ -3,6 +3,11 @@
 ```
 ros2 pkg create --build-type ament_python fedor_control
 ```
+# Запуск сервера
+Перед запуском пакета необходимо запустить вебсервер
+```
+python3 src/fedod_control/fedor_gui/main.py
+```
 # Запуск пакета
 1. Собираем пакет
 ```

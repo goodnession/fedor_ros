@@ -9,7 +9,7 @@ from std_msgs.msg import String
 from .motor.motor import Motor
 
 
-PERIOD = 0.05  # Устанавливаем в секундах период отправки сообщений в топиках
+PERIOD = 0.01  # Устанавливаем в секундах период отправки сообщений в топиках
 
 
 class FedorController(Node):
