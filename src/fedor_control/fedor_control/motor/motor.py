@@ -11,6 +11,8 @@ class Motor:
 
     torq -- максимальное значение тока;
 
+    vel -- максимальное значение скорости оборотов;
+
     kP -- П коэффициент для ПИД-регулятора;
 
     kI -- И коэффициент для ПИД-регулятора;
@@ -22,11 +24,12 @@ class Motor:
     description -- описание мотора.
     """
 
-    def __init__(self, name, minAngPos, maxAngPos, torq, kP, kI, kD, t, description) -> None:
+    def __init__(self, name, minAngPos, maxAngPos, torq, vel, kP, kI, kD, t, description) -> None:
         self.name = name
         self.minAngPos = minAngPos
         self.maxAngPos = maxAngPos
         self.torq = torq
+        self.vel = vel
         self.kP = kP
         self.kI = kI
         self.kD = kD
@@ -59,7 +62,9 @@ class Motor:
         self.integral_error += self.error * self.t
         self.derivative_error = (self.error - self.error_last) / self.t
         self.error_last = self.error
-        self.output = self.kP * self.error + self.kI * self.integral_error + self.kD * self.derivative_error
+        self.output = self.kP * self.error +\
+                      self.kI * self.integral_error +\
+                      self.kD * self.derivative_error
 
         if self.output > self.torq:
             self.output = self.torq

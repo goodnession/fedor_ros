@@ -11,7 +11,6 @@ class TcpConnector:
     port -- порт.
     """
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    connected = False
 
     def __init__(self, host, port) -> None:
         self.host = host
@@ -21,12 +20,10 @@ class TcpConnector:
     def connect(self) -> None:
         """Подключается к симулятору."""
         self.sock.connect((self.host, self.port))
-        self.connected = True
 
     def disconnect(self) -> None:
         """Отключается от симулятора."""
         self.sock.close()
-        self.connected = False
 
     def reconnect(self) -> None:
         """Переподключается к симулятору."""
@@ -38,7 +35,6 @@ class TcpConnector:
         while True:
             try:
                 self.sock.send((req + '\n').encode())
-                # sleep(0.01)
                 data = self.sock.recv(1024)
                 if b'\xf0' in data:
                     return None

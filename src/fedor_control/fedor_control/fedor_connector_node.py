@@ -7,7 +7,7 @@ from .tcp_connector.tcpconnector import TcpConnector
 
 
 PERIOD = 0.01  # Устанавливаем в секундах период отправки сообщений в топиках
-HOST = '192.168.0.101'
+HOST = '192.168.0.105'
 PORT = 10099
 
 
@@ -41,14 +41,16 @@ class FedorConnector(Node):
             String,
             'motors_list_topic',
             self.sub_motors_list_callback,
-            10)
+            10
+        )
         self.motors_list = ''
         # Инициализируем subscriber на значения тока
         self.subscription_motors_torqset = self.create_subscription(
             String,
             'motors_torqset_topic',
             self.sub_motors_torqset_callback,
-            10)
+            10
+        )
 
     def pub_motors_position_callback(self):
         """Отправлят текущие позиции моторов."""
@@ -72,7 +74,7 @@ class FedorConnector(Node):
         temp = json.loads(msg.data)
         for el in temp:
             for k, v in el.items():
-                self.conn.request(f'robot:motors:{k}:torqset:{str(v)}')
+                self.conn.request(f'robot:motors:{k}:velset:{str(v)}')
 
 
 def main(args=None):

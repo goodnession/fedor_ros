@@ -40,14 +40,14 @@ class FedorController(Node):
             self.pub_motors_list_callback,
         )
         # Инициализируем publisher значений тока
-        self.publisher_motors_torqset = self.create_publisher(
+        self.publisher_motors_control_signal = self.create_publisher(
             String,
             'motors_torqset_topic',
             10,
         )
-        self.timer_pub_motors_torqset = self.create_timer(
+        self.timer_pub_motors_control_signal = self.create_timer(
             timer_period,
-            self.pub_motors_torqset_callback,
+            self.pub_motors_control_signal_callback,
         )
         # Инициализируем моторы
         # Считываем из конфига моторов
@@ -65,6 +65,7 @@ class FedorController(Node):
                             name=el['name'],
                             minAngPos=el['minAngPos'],
                             maxAngPos=el['maxAngPos'],
+                            vel=el['vel'],
                             torq=el['torq'],
                             kP=el['kP'],
                             kI=el['kI'],
@@ -117,7 +118,7 @@ class FedorController(Node):
 
         self.publisher_motors_list.publish(msg)
 
-    def pub_motors_torqset_callback(self) -> None:
+    def pub_motors_control_signal_callback(self) -> None:
         """Вычисляет с помощью ПИД-регулятора и отправляет значение тока мотороам."""
         motors_pid = requests.get('http://127.0.0.1:5000/motors_pid').json()
         # Устанавливаем ПИД-коэффициенты
@@ -145,7 +146,7 @@ class FedorController(Node):
 
         msg = String()
         msg.data = json.dumps(temp)
-        self.publisher_motors_torqset.publish(msg)
+        self.publisher_motors_control_signal.publish(msg)
 
 
 def main(args=None):
