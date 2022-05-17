@@ -41,15 +41,15 @@ class FedorConnector(Node):
             String,
             'motors_list_topic',
             self.sub_motors_list_callback,
-            10
+            10,
         )
         self.motors_list = ''
         # Инициализируем subscriber на значения тока
-        self.subscription_motors_torqset = self.create_subscription(
+        self.subscription_motors_velset = self.create_subscription(
             String,
-            'motors_torqset_topic',
-            self.sub_motors_torqset_callback,
-            10
+            'motors_velset_topic',
+            self.sub_motors_velset_callback,
+            10,
         )
 
     def pub_motors_position_callback(self):
@@ -70,7 +70,7 @@ class FedorConnector(Node):
         """
         self.motors_list = msg.data
 
-    def sub_motors_torqset_callback(self, msg):
+    def sub_motors_velset_callback(self, msg):
         temp = json.loads(msg.data)
         for el in temp:
             for k, v in el.items():

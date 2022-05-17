@@ -42,7 +42,7 @@ class FedorController(Node):
         # Инициализируем publisher значений тока
         self.publisher_motors_control_signal = self.create_publisher(
             String,
-            'motors_torqset_topic',
+            'motors_velset_topic',
             10,
         )
         self.timer_pub_motors_control_signal = self.create_timer(
